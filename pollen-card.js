@@ -205,7 +205,7 @@ class PollenCard extends HTMLElement {
       entries = entries.filter((entry) => (entry.level || 0) > 0);
     }
     if (cfg.sort_by_level) {
-      entries.sort((a, b) => (b.level || 0) - (a.level || 0));
+      entries.sort((a, b) => (b.level || 0) - (a.level || 0) || a.name.localeCompare(b.name));
     }
 
     this._el.rows.innerHTML = '';
