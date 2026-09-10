@@ -13,6 +13,10 @@ Ships two elements:
   currently active level from a set of sensors, meant for a dashboard badge row
   next to e.g. a person entity.
 
+<p align="center">
+  <img src="assets/pollen-card-preview.png" alt="pollen-card showing several active allergens with colour-coded level icons" width="360">
+</p>
+
 ## How level detection works
 
 For each configured entity, the card looks for a numeric level in this order:
