@@ -7,7 +7,8 @@ names — so it works with most pollen integrations without any adapter code.
 
 Ships two elements:
 
-- `custom:pollen-card` — a list of active allergens with a colour-coded level pill each.
+- `custom:pollen-card` — a list of active allergens, each with a colour-filled
+  allergen icon indicating its severity level.
 - `custom:pollen-card-badge` — a compact single-icon badge showing the worst
   currently active level from a set of sensors, meant for a dashboard badge row
   next to e.g. a person entity.

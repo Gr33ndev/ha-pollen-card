@@ -76,7 +76,7 @@ function readLevelLabel(stateObj) {
 function readAllergenName(stateObj, override) {
   if (override) return override;
   const attrs = stateObj.attributes || {};
-  return attrs.name_en || attrs.allergen || attrs.friendly_name || stateObj.entity_id;
+  return attrs.friendly_name || attrs.allergen || attrs.name_en || stateObj.entity_id;
 }
 
 function readAllergenKey(stateObj) {
@@ -143,14 +143,6 @@ class PollenCard extends HTMLElement {
           cursor: pointer;
         }
         .row:hover { background: var(--secondary-background-color, rgba(127,127,127,.08)); }
-        .row-icon {
-          width: 28px; height: 28px;
-          border-radius: 50%;
-          display: flex; align-items: center; justify-content: center;
-          flex-shrink: 0;
-          background: var(--secondary-background-color, rgba(127,127,127,.15));
-        }
-        .row-icon ha-icon { --mdc-icon-size: 16px; }
         .row-name {
           flex: 1;
           font-size: .92rem;
@@ -159,15 +151,13 @@ class PollenCard extends HTMLElement {
           text-overflow: ellipsis;
           white-space: nowrap;
         }
-        .row-level {
-          font-size: .78rem;
-          font-weight: 600;
-          padding: 2px 10px;
-          border-radius: 999px;
-          color: #fff;
-          white-space: nowrap;
+        .row-level-icon {
+          width: 30px; height: 30px;
+          border-radius: 50%;
+          display: flex; align-items: center; justify-content: center;
           flex-shrink: 0;
         }
+        .row-level-icon ha-icon { --mdc-icon-size: 17px; color: #fff; }
         .empty { font-size: .9rem; color: var(--secondary-text-color); padding: 8px 4px; }
       </style>
       <ha-card>
@@ -240,24 +230,20 @@ class PollenCard extends HTMLElement {
         );
       });
 
-      const iconWrap = document.createElement('div');
-      iconWrap.className = 'row-icon';
-      const icon = document.createElement('ha-icon');
-      icon.setAttribute('icon', entry.icon);
-      iconWrap.appendChild(icon);
-
       const name = document.createElement('div');
       name.className = 'row-name';
       name.textContent = entry.name;
 
-      const level = document.createElement('div');
-      level.className = 'row-level';
-      level.style.background = colorForLevel(entry.level, cfg.max_level);
-      level.textContent = entry.label || (entry.level !== null ? String(entry.level) : '?');
+      const levelIcon = document.createElement('div');
+      levelIcon.className = 'row-level-icon';
+      levelIcon.style.background = colorForLevel(entry.level, cfg.max_level);
+      levelIcon.title = entry.label || (entry.level !== null ? String(entry.level) : '?');
+      const icon = document.createElement('ha-icon');
+      icon.setAttribute('icon', entry.icon);
+      levelIcon.appendChild(icon);
 
-      row.appendChild(iconWrap);
       row.appendChild(name);
-      row.appendChild(level);
+      row.appendChild(levelIcon);
       this._el.rows.appendChild(row);
     });
   }
